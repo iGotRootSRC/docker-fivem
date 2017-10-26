@@ -5,7 +5,7 @@ ENV MONO_VERSION 5.0.0.100
 
 # Install dependencies 
 RUN apt-get update \
-  && apt-get install -y git-core wget xz-utils curl \
+  && apt-get install -y apt-utils git-core xz-utils curl \
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
@@ -21,6 +21,8 @@ ENV FX_DOWNLOAD_URL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/
 ENV FX_PATH "/fivem/fx-server"
 ENV FX_PATH_DATA "/fivem/fx-server-data"
 ENV FX_ARCHIVE fx.tar.xz
+ENV FX_CONFIG https://file.dracomail.net/fivem/server.cfg
+ENV FX_PORT 30120
 
 # Container Setup
 RUN mkdir /fivem && \
@@ -28,9 +30,9 @@ RUN mkdir /fivem && \
 	mkdir "$FX_PATH_DATA" && \
 	mkdir /opt/cfx-server && \
 	cd /fivem && \
-	wget "$FX_DOWNLOAD_URL" && \
+	curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE" && \
 	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA" && \
-	wget https://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg && \
+	curl -fsSL "$FX_CONFIG" -o "$FX_PATH_DATA"/server.cfg && \
 	tar -xvf "$FX_ARCHIVE" -C "$FX_PATH" && \
 	rm "$FX_ARCHIVE"
 
@@ -39,7 +41,7 @@ RUN chmod -R 775 "$FX_PATH_DATA"
 
 WORKDIR "$FX_PATH_DATA"
 
-EXPOSE 30120
-EXPOSE 30120/udp
+EXPOSE "$FX_PORT"
+EXPOSE "$FX_PORT"/udp
 
 CMD /fivem/fx-server/run.sh +exec server.cfg
