@@ -13,21 +13,20 @@ ENV FX_PATH_DATA "/home/fx-server-data"
 ENV FX_ARCHIVE fx.tar.xz
 
 # Container Setup
-RUN adduser -D "$FX_USER" && \
-    mkdir "$FX_PATH" && \
-	mkdir "$FX_PATH_DATA" && \
-    cd "$FX_PATH" && \
-	cd .. && \
-    curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE" && \
-	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA" && \
-	wget http://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg && \
-	tar -xvf "$FX_ARCHIVE" -C "$FX_PATH" && \
-	rm "$FX_ARCHIVE"
+RUN adduser -D "$FX_USER"
+RUN mkdir "$FX_PATH"
+RUN	mkdir "$FX_PATH_DATA"
+RUN cd "$FX_PATH"
+RUN	cd ..
+RUN curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE"
+RUN	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA"
+RUN	wget http://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg
+RUN	tar -xvf "$FX_ARCHIVE" -C "$FX_PATH"
+RUN	rm "$FX_ARCHIVE"
 
 
-RUN unzip "$FX_ARCHIVE2" && \
-
-RUN chmod -R 777 "$FX_PATH"
+RUN chmod -R 775 "$FX_PATH"
+RUN chmod -R 775 "$FX_PATH_DATA"
 WORKDIR "$FX_PATH"
 
 VOLUME ["$HatH_PATH/cache", "$HatH_PATH/data", "$HatH_PATH/download", "$HatH_PATH/hathdl"]
