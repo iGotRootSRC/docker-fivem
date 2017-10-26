@@ -15,6 +15,7 @@ ENV FX_ARCHIVE fx.tar.xz
 RUN mkdir /fivem && \
 	mkdir "$FX_PATH" && \
 	mkdir "$FX_PATH_DATA" && \
+	mkdir /opt/cfx-server && \
 	cd /fivem && \
 	wget "$FX_DOWNLOAD_URL" && \
 	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA" && \
