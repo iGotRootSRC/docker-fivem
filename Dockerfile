@@ -1,8 +1,22 @@
 FROM debian:jessie
 MAINTAINER DracoDragon88
 
+ENV MONO_VERSION 4.8.0.524
+
 # Install dependencies 
-RUN apt-get update && apt-get -y install git-core && apt-get -y install wget && apt-get -y install xz-utils
+RUN apt-get update \
+  && apt-get install -y git-core \
+  && apt-get install -y wget \
+  && apt-get install -y xz-utils \
+  && apt-get install -y curl \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+
+RUN echo "deb echo "deb http://download.mono-project.com/repo/debian jessie/snapshots/$MONO_VERSION main" > /etc/apt/sources.list.d/mono-xamarin.list \
+  && apt-get update \
+  && apt-get install -y binutils mono-devel ca-certificates-mono fsharp mono-vbnc nuget referenceassemblies-pcl \
+  && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Common
 ENV FX_VERSION 401-7da138fa4851430482ff2fb4e196b871d5ea3efb
