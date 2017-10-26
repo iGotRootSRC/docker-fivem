@@ -1,14 +1,11 @@
 FROM debian:jessie
 MAINTAINER DracoDragon88
 
-ENV MONO_VERSION 4.8.0.524
+ENV MONO_VERSION 5.0.0.100
 
 # Install dependencies 
 RUN apt-get update \
-  && apt-get install -y git-core \
-  && apt-get install -y wget \
-  && apt-get install -y xz-utils \
-  && apt-get install -y curl \
+  && apt-get install -y git-core wget xz-utils curl \
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
