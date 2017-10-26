@@ -1,3 +1,4 @@
+FROM debian:jessie
 MAINTAINER DracoDragon88
 
 # Install dependencies 
@@ -12,12 +13,13 @@ ENV FX_PATH_DATA "/home/fx-server-data"
 ENV FX_ARCHIVE fx.tar.xz
 
 # Container Setup
-RUN adduser -D "$FX_USER"
-RUN mkdir "$FX_PATH"
-RUN	mkdir "$FX_PATH_DATA"
-RUN cd "$FX_PATH"
-RUN	cd ..
-RUN curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE"
+RUN adduser -D "$FX_USER" && \
+	mkdir "$FX_PATH" && \
+	mkdir "$FX_PATH_DATA" && \
+	cd "$FX_PATH" && \
+	cd .. && \
+	curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE" && \
+	
 RUN	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA"
 RUN	wget http://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg
 RUN	tar -xvf "$FX_ARCHIVE" -C "$FX_PATH"
