@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER DracoDragon88
 
 # Install dependencies 
-RUN apt-get update && apt-get install git-core && apt-get install wget
+RUN apt-get update && apt-get -y install git-core && apt-get -y install wget
 
 # Common
 ENV FX_VERSION 401-7da138fa4851430482ff2fb4e196b871d5ea3efb
