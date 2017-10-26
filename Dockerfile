@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER DracoDragon88
 
 # Install dependencies 
-RUN apk --no-cache add curl sqlite unzip git
+RUN apt-get update && apt-get install git-core && apt-get install wget
 
 # Common
 ENV FX_VERSION 401-7da138fa4851430482ff2fb4e196b871d5ea3efb
@@ -18,18 +18,15 @@ RUN adduser -D "$FX_USER" && \
 	mkdir "$FX_PATH_DATA" && \
 	cd "$FX_PATH" && \
 	cd .. && \
-	curl -fsSL "$FX_DOWNLOAD_URL" -o "$FX_ARCHIVE" && \
+	wget "$FX_DOWNLOAD_URL" && \
 	
 RUN	git clone https://github.com/citizenfx/cfx-server-data.git "$FX_PATH_DATA"
-RUN	wget http://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg
+RUN	wget https://file.dracomail.net/fivem/server.cfg -O "$FX_PATH_DATA"/server.cfg
 RUN	tar -xvf "$FX_ARCHIVE" -C "$FX_PATH"
 RUN	rm "$FX_ARCHIVE"
-
 
 RUN chmod -R 775 "$FX_PATH"
 RUN chmod -R 775 "$FX_PATH_DATA"
 WORKDIR "$FX_PATH_DATA"
-
-VOLUME ["$HatH_PATH/cache", "$HatH_PATH/data", "$HatH_PATH/download", "$HatH_PATH/hathdl"]
 
 CMD /home/fx-server/run.sh +exec server.cfg
