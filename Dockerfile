@@ -45,4 +45,4 @@ WORKDIR "$FX_PATH_DATA"
 EXPOSE "$FX_PORT"
 EXPOSE "$FX_PORT"/udp
 
-CMD /fivem/fx-server/run.sh +exec server.cfg > FXserver.txt
+CMD /fivem/fx-server/run.sh +exec server.cfg
