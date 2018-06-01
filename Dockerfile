@@ -16,7 +16,7 @@ RUN echo "deb http://download.mono-project.com/repo/debian jessie/snapshots/$MON
   && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Common
-ENV FX_VERSION 626-ec89c64f976352a3420e6aea585752c4e9aafdbe
+ENV FX_VERSION 631-981fcab15221dcf5cd5eea6ad039f240083759da
 ENV FX_DOWNLOAD_URL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/$FX_VERSION/fx.tar.xz
 ENV FX_RESOURCES_URL https://github.com/citizenfx/cfx-server-data.git
 ENV FX_PATH "/fivem/fx-server"
