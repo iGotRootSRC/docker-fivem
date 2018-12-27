@@ -12,7 +12,7 @@ RUN echo "deb https://download.mono-project.com/repo/debian stable-jessie main" 
 RUN apt update
 
 # Common
-ENV FX_VERSION 807-a33d6db066568046a9a99b14b0fccb03bb978e2f
+ENV FX_VERSION 931-62c5413ba907889fc5b72043f4e7d9b643fc5455
 ENV FX_DOWNLOAD_URL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/$FX_VERSION/fx.tar.xz
 ENV FX_RESOURCES_URL https://github.com/citizenfx/cfx-server-data.git
 ENV FX_PATH "/fivem/fx-server"
